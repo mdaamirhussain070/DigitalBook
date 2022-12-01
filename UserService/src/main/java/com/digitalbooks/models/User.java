@@ -18,7 +18,10 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
+	
+	@NotBlank
+	@Size(min=3,max=50)
+	private String name;  // User name Required
 	@NotBlank
 	@Size(max = 20)
 	private String username;
@@ -31,6 +34,10 @@ public class User {
 	@NotBlank
 	@Size(max = 120)
 	private String password;
+	
+
+	@Size(max=10)
+	private String phoneNumber;
 
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(	name = "user_roles", 
@@ -41,10 +48,22 @@ public class User {
 	public User() {
 	}
 
-	public User(String username, String email, String password) {
+//	public User(String username, String email, String password) {
+//		this.username = username;
+//		this.email = email;
+//		this.password = password;
+//	}
+	
+	
+
+	public User(String name,String username,String email,String password,String phoneNumber) {
+		this.id = id;
+		this.name = name;
 		this.username = username;
 		this.email = email;
 		this.password = password;
+		this.phoneNumber = phoneNumber;
+	
 	}
 
 	public Long getId() {
@@ -85,5 +104,21 @@ public class User {
 
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 }

@@ -87,31 +87,31 @@ public class AuthController {
 		}
 
 		// Create new user's account
-		User user = new User(signUpRequest.getUsername(), 
+		User user = new User(signUpRequest.getName(),signUpRequest.getUsername(), 
 							 signUpRequest.getEmail(),
-							 encoder.encode(signUpRequest.getPassword()));
+							 encoder.encode(signUpRequest.getPassword()),signUpRequest.getPhoneNumber());
 
 		Set<String> strRoles = signUpRequest.getRole();
 		Set<Role> roles = new HashSet<>();
 
 		if (strRoles == null) {
-			Role userRole = roleRepository.findByName(ERole.ROLE_READER)
+			Role readerRole = roleRepository.findByName(ERole.ROLE_READER)
 					.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-			roles.add(userRole);
+			roles.add(readerRole);
 		} else {
 			strRoles.forEach(role -> {
 				switch (role) {
 				case "AUTHER":
-					Role adminRole = roleRepository.findByName(ERole.ROLE_AUTHER)
+					Role autherRole = roleRepository.findByName(ERole.ROLE_AUTHER)
 							.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-					roles.add(adminRole);
+					roles.add(autherRole);
 
 					break;
 				
 				default:
-					Role userRole = roleRepository.findByName(ERole.ROLE_READER)
+					Role readerRole = roleRepository.findByName(ERole.ROLE_READER)
 							.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-					roles.add(userRole);
+					roles.add(readerRole);
 				}
 			});
 		}
