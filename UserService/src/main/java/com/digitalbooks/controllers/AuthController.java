@@ -101,7 +101,7 @@ public class AuthController {
 						.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
 				roles.add(readerRole);
 				}
-				else {
+				else if(signUpRequest.getUserRole().equals("AUTHER")) {
 					Role autherRole = roleRepository.findByName(ERole.ROLE_AUTHER)
 							.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
 					roles.add(autherRole);
