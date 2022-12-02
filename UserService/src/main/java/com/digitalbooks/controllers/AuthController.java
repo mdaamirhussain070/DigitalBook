@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.digitalbooks.exceptions.ResourceAlreadyExist;
+import com.digitalbooks.exceptions.RoleNotFound;
 import com.digitalbooks.models.ERole;
 import com.digitalbooks.models.Role;
 import com.digitalbooks.models.User;
@@ -75,15 +77,11 @@ public class AuthController {
 	@PostMapping("/signup")
 	public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
 		if (userRepository.existsByUsername(signUpRequest.getUsername())) {
-			return ResponseEntity
-					.badRequest()
-					.body(new MessageResponse("Error: Username is already taken!"));
+			throw new ResourceAlreadyExist("Already Exist","USERNAME" , signUpRequest.getUsername());
 		}
 
 		if (userRepository.existsByEmail(signUpRequest.getEmail())) {
-			return ResponseEntity
-					.badRequest()
-					.body(new MessageResponse("Error: Email is already in use!"));
+			throw new ResourceAlreadyExist("Already Exist","EMAIL" , signUpRequest.getEmail());
 		}
 
 		// Create new user's account
@@ -98,12 +96,12 @@ public class AuthController {
 			if(signUpRequest.getUserRole().equals("READER")) {
 				
 				Role readerRole = roleRepository.findByName(ERole.ROLE_READER)
-						.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+						.orElseThrow(() -> new RoleNotFound("Not Exist"));
 				roles.add(readerRole);
 				}
 				else if(signUpRequest.getUserRole().equals("AUTHER")) {
 					Role autherRole = roleRepository.findByName(ERole.ROLE_AUTHER)
-							.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+							.orElseThrow(() ->  new RoleNotFound("Not Exist"));
 					roles.add(autherRole);
 				}
 		}
