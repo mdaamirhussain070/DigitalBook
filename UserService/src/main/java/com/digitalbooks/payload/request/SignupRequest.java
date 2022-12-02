@@ -16,8 +16,18 @@ public class SignupRequest {
     @Size(max = 50)
     @Email
     private String email;
+    @NotBlank
+    private String userRole;
     
-    private Set<String> role;
+    public String getUserRole() {
+		return userRole;
+	}
+
+	public void setUserRole(String userRole) {
+		this.userRole = userRole;
+	}
+
+	private Set<String> role;
     
     @NotBlank
     @Size(min = 6, max = 40)
