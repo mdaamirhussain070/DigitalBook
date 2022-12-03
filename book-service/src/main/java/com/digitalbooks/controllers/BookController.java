@@ -17,9 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.digitalbooks.models.Book;
 import com.digitalbooks.payload.request.BookCreaPayload;
-import com.digitalbooks.payload.request.BookRespPayload;
+import com.digitalbooks.payload.response.BookRespPayload;
 import com.digitalbooks.repository.BookRepository;
 import com.digitalbooks.service.BookService;
+
+
 
 
 

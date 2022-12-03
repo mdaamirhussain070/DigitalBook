@@ -1,4 +1,4 @@
-package com.digitalbooks.payload.request;
+package com.digitalbooks.payload.response;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;

@@ -1,3 +1,4 @@
+package com.digitalbooks.models;
 //package com.digitalbooks.models;
 //
 //import javax.persistence.Entity;
