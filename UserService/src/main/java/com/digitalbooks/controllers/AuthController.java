@@ -99,10 +99,10 @@ public class AuthController {
 					.orElseThrow(() -> new RoleNotFound("Not Exist"));
 			roles.add(readerRole);
 			}
-			else if(signUpRequest.getUserRole().equals("AUTHER")) {
-				Role autherRole = roleRepository.findByName(ERole.ROLE_AUTHER)
+			else if(signUpRequest.getUserRole().equals("AUTHOR")) {
+				Role authorRole = roleRepository.findByName(ERole.ROLE_AUTHOR)
 						.orElseThrow(() ->  new RoleNotFound("Not Exist"));
-				roles.add(autherRole);
+				roles.add(authorRole);
 			}
 
 /*		if (strRoles == null) {
