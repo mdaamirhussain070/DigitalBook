@@ -1,12 +1,14 @@
 package com.digitalbooks.controllers;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,7 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.digitalbooks.models.Book;
 import com.digitalbooks.payload.request.BookCreaPayload;
 import com.digitalbooks.payload.request.BookRespPayload;
+import com.digitalbooks.repository.BookRepository;
 import com.digitalbooks.service.BookService;
+
+
 
 
 
@@ -26,6 +31,9 @@ public class BookController {
 	
 	@Autowired
 	private BookService bookService;
+	
+	@Autowired
+	private BookRepository bookRepository;
 	
 	// /author/{author-id}/books
 	
@@ -62,6 +70,15 @@ public ResponseEntity<BookRespPayload> createBook( @Valid @PathVariable("author-
 	
 	
 	return new ResponseEntity<BookRespPayload>(resp,HttpStatus.CREATED);
-}
+	}
+	
+	@GetMapping()
+	public ResponseEntity<List<Book>> getAllBooks(){
+		
+		List<Book> books=bookRepository.findAll();
+		return new ResponseEntity<List<Book>>(books,HttpStatus.OK);
+	}
 
 }
+
+
