@@ -6,6 +6,7 @@ import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -36,7 +37,7 @@ public class User {
 	private String password;
 	
 
-	@Size(max=10)
+	@Pattern(regexp="(^$|[0-9]{10})",message = "Mobile number must be 10 digits")
 	private String phoneNumber;
 
 	@ManyToMany(fetch = FetchType.LAZY)
