@@ -174,7 +174,7 @@ public class Book {
 		return updatedOn;
 	}
 
-	public void setPudatedOn(LocalDate pudatedOn) {
+	public void setPudatedOn(LocalDate updatedOn) {
 		this.updatedOn = updatedOn;
 	}
 

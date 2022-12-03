@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import com.digitalbooks.utility.ApiResponse;
 
 @RestControllerAdvice
-public class GlobalException {
+public class GlobalExceptionHandler {
 	
 	@ExceptionHandler(ResourceNotFound.class)
 	public ResponseEntity<ApiResponse> resourceNotFoundException(ResourceNotFound ex){
