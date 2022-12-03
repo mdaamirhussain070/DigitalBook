@@ -36,7 +36,7 @@ import com.digitalbooks.security.services.UserDetailsImpl;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/digitalbooks")
 public class AuthController {
 	@Autowired
 	AuthenticationManager authenticationManager;
@@ -89,10 +89,23 @@ public class AuthController {
 							 signUpRequest.getEmail(),
 							 encoder.encode(signUpRequest.getPassword()),signUpRequest.getPhoneNumber());
 
-		Set<String> strRoles = signUpRequest.getRole();
+//		Set<String> strRoles = signUpRequest.getRole();
 		Set<Role> roles = new HashSet<>();
+		
+		
+		if(signUpRequest.getUserRole().equals("READER")) {
+			
+			Role readerRole = roleRepository.findByName(ERole.ROLE_READER)
+					.orElseThrow(() -> new RoleNotFound("Not Exist"));
+			roles.add(readerRole);
+			}
+			else if(signUpRequest.getUserRole().equals("AUTHER")) {
+				Role autherRole = roleRepository.findByName(ERole.ROLE_AUTHER)
+						.orElseThrow(() ->  new RoleNotFound("Not Exist"));
+				roles.add(autherRole);
+			}
 
-		if (strRoles == null) {
+/*		if (strRoles == null) {
 			if(signUpRequest.getUserRole().equals("READER")) {
 				
 				Role readerRole = roleRepository.findByName(ERole.ROLE_READER)
@@ -105,7 +118,7 @@ public class AuthController {
 					roles.add(autherRole);
 				}
 		}
-		
+*/		
 /*		else {
 			strRoles.forEach(role -> {
 				switch (role) {
