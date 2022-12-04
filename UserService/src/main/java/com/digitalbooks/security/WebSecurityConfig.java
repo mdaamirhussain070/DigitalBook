@@ -59,9 +59,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 			.authorizeRequests()
-			.antMatchers("/digitalbooks/**").permitAll()
+			.antMatchers("/digitalbooks/signin").permitAll()
+			.antMatchers("/digitalbooks/signup").permitAll()
 			.antMatchers("/api/test/**").permitAll()
 			.antMatchers("/swagger-ui/**").permitAll()
+			.antMatchers("/digitalbooks/author/books").authenticated()
 			.anyRequest().authenticated();
 
 		http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);

@@ -9,8 +9,6 @@ import com.digitalbooks.payload.response.BookRespPayload;
 public interface AuthorService {
 	
 	
-	BookRespPayload createBook(BookCreaPayload bookcreatepayload);
-	
 	List<Book> getAllBooks(String title,String author, double price,String publisher);
 
 }

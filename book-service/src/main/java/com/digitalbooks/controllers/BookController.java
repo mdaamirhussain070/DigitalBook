@@ -21,12 +21,14 @@ import com.digitalbooks.payload.response.BookRespPayload;
 import com.digitalbooks.repository.BookRepository;
 import com.digitalbooks.service.BookService;
 
+import lombok.extern.slf4j.Slf4j;
 
 
 
 
 
 
+@Slf4j
 @RestController
 @RequestMapping("/digitalbooks/")
 public class BookController {
@@ -44,7 +46,7 @@ public ResponseEntity<BookRespPayload> createBook( @Valid @PathVariable("author-
 	
 	 LocalDate now = LocalDate.now();  
 	
-	 System.out.println(bookpayload);
+	log.debug("called from User Service");
 	 
 	Book book=new Book(bookpayload.getTitle(),
 			bookpayload.getCode(),
@@ -56,7 +58,7 @@ public ResponseEntity<BookRespPayload> createBook( @Valid @PathVariable("author-
 			now,
 			true,
 			bookpayload.getBookcontent());
-	System.out.println(book);
+	log.info("Book Object created");
 
 	Book createdbook=bookService.createBook(book);
 	BookRespPayload resp=new BookRespPayload();

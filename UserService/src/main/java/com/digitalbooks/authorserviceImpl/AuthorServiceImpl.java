@@ -4,11 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.digitalbooks.authorservice.AuthorService;
 import com.digitalbooks.models.Book;
+import com.digitalbooks.models.User;
 import com.digitalbooks.payload.request.BookCreaPayload;
 import com.digitalbooks.payload.response.BookRespPayload;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -19,24 +22,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 public class AuthorServiceImpl implements AuthorService {
-
-	@Override
-	public BookRespPayload createBook(BookCreaPayload bookcreatepayload) {
-
-		RestTemplate resttemp = new RestTemplate();
-
-//		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//		Long authorId=user.getId();
-		Long authorId = 1L;
-		log.info("Recived author Id from SecurityContextHolder");
-
-		String url = "http://localhost:8085/digitalbooks/author/" + authorId + "/book";
-
-		BookRespPayload bokresp = resttemp.postForObject(url, bookcreatepayload, BookRespPayload.class);
-		log.info("Book Creation successfull");
-
-		return bokresp;
-	}
 
 	@Override
 	public List<Book> getAllBooks(String title, String author, double price, String publisher) {
