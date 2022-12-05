@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -33,6 +34,8 @@ import com.digitalbooks.repository.RoleRepository;
 import com.digitalbooks.repository.UserRepository;
 import com.digitalbooks.security.jwt.JwtUtils;
 import com.digitalbooks.security.services.UserDetailsImpl;
+import com.digitalbooks.utility.ApiResponse;
+import com.digitalbooks.utility.RegistrationResponse;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -75,7 +78,7 @@ public class AuthController {
 	}
 
 	@PostMapping("/signup")
-	public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
+	public ResponseEntity<RegistrationResponse> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
 		if (userRepository.existsByUsername(signUpRequest.getUsername())) {
 			throw new ResourceAlreadyExist("Already Exist","USERNAME" , signUpRequest.getUsername());
 		}
@@ -136,10 +139,10 @@ public class AuthController {
 				}
 			});
 		}
-*/
+*/		
 		user.setRoles(roles);
 		userRepository.save(user);
 
-		return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+		return new ResponseEntity<RegistrationResponse>(new RegistrationResponse("User Registration successfull !"),HttpStatus.OK);
 	}
 }

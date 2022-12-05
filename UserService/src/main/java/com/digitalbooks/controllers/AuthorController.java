@@ -59,7 +59,6 @@ public class AuthorController {
 			
 		}
 			
-	//	Long id=userlogedin.getId();
 		log.info("Recived author Id from SecurityContextHolder");
 
 		String url = "http://localhost:8085/digitalbooks/author/"+id+"/books";

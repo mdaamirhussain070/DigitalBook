@@ -6,6 +6,10 @@ public class ApiResponse {
 	private String resource;
 	private String fieldName;
 	private String fieldValue;
+	
+	
+	
+	
 	public String getResource() {
 		return resource;
 	}
