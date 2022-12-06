@@ -53,6 +53,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
+	@Bean
+	public RestTemplate restTemplate() {
+		return new RestTemplate();
+	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -66,6 +70,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/swagger-ui/**").permitAll()
 			.antMatchers("/digitalbooks/author/books").authenticated()
 			.antMatchers("/digitalbooks/author/books/**").authenticated()
+			.antMatchers("/digitalbooks/author/books/{book-id}").authenticated()
 			.anyRequest().authenticated();
 
 		http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);

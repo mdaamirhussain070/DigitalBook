@@ -15,6 +15,13 @@ public class BookUpdateResponse {
 		this.fieldName = fieldName;
 		this.fieldValue = fieldValue;
 	}
+	
+	
+	public BookUpdateResponse(String resource) {
+		this.resource = resource;
+	}
+
+
 	public String getResource() {
 		return resource;
 	}

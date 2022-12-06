@@ -2,6 +2,10 @@ package com.digitalbooks.exceptions;
 
 public class RoleNotFound extends RuntimeException{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String resourceName;
 	
 	public RoleNotFound(String resourceName) {

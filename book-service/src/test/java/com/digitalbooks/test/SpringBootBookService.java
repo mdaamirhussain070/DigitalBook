@@ -8,7 +8,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
@@ -56,7 +55,7 @@ public class SpringBootBookService {
 		Book book = new Book(11, "Hulk", 110, 2, "comic", 50, "marvel", LocalDateTime.now(), LocalDateTime.now(), true,
 				"Hulk is comming soon");
 
-		when(bookService.createBook(book)).thenReturn(book);
+	//	when(bookService.createBook(book)).thenReturn(book);
 		ObjectMapper objectMapper = new ObjectMapper();
 		String object = objectMapper.writeValueAsString(book);
 

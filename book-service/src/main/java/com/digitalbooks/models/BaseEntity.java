@@ -8,7 +8,6 @@ import javax.persistence.MappedSuperclass;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import lombok.Data;
-import lombok.Getter;
 
 @Data
 @MappedSuperclass

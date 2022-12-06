@@ -29,12 +29,10 @@ import com.digitalbooks.models.User;
 import com.digitalbooks.payload.request.LoginRequest;
 import com.digitalbooks.payload.request.SignupRequest;
 import com.digitalbooks.payload.response.JwtResponse;
-import com.digitalbooks.payload.response.MessageResponse;
 import com.digitalbooks.repository.RoleRepository;
 import com.digitalbooks.repository.UserRepository;
 import com.digitalbooks.security.jwt.JwtUtils;
 import com.digitalbooks.security.services.UserDetailsImpl;
-import com.digitalbooks.utility.ApiResponse;
 import com.digitalbooks.utility.RegistrationResponse;
 
 @CrossOrigin(origins = "*", maxAge = 3600)

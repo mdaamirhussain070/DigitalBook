@@ -4,6 +4,10 @@ package com.digitalbooks.exceptions;
 
 public class ResourceAlreadyExist extends RuntimeException {
 		
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String resourceName;
 	private String fieldName;
 	private String fieldValue;

@@ -1,14 +1,12 @@
 package com.digitalbooks.controllers;
 
-import java.util.Optional;
+import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -19,14 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import com.digitalbooks.authorservice.AuthorService;
-import com.digitalbooks.models.User;
 import com.digitalbooks.payload.request.BookCreaPayload;
 import com.digitalbooks.payload.response.BookRespPayload;
-import com.digitalbooks.repository.UserRepository;
-import com.digitalbooks.utility.ApiResponse;
 import com.digitalbooks.utility.BookUpdateResponse;
+import com.digitalbooks.utility.BookStatus;
 
-import javassist.expr.NewArray;
 import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RestController
@@ -34,91 +29,54 @@ import lombok.extern.slf4j.Slf4j;
 public class AuthorController {
 	
 	@Autowired
-	private UserRepository userRepository;
-
+	private AuthorService authorService;
+	
 	RestTemplate restTemplate=new RestTemplate();
 	@PostMapping("/author/books")
 	@PreAuthorize("hasRole('AUTHOR')")
 	public ResponseEntity<BookRespPayload> createBook(@RequestBody BookCreaPayload bookCreatePayload){
-		
-	
-
-	
-		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		String username="";
-		if (principal instanceof UserDetails) {
-		username = ((UserDetails)principal).getUsername();
-		} else {
-		username = principal.toString();
-		}
-	
-		log.info(username);
-
-		Optional<User> userlogedin=userRepository.findByUsername(username);
-		long id=0;
-		log.info("Default id="+id);
-		if(userlogedin.isPresent()) {
-			String user=userlogedin.get().getUsername();
-			id=userlogedin.get().getId();
-			log.info(user);
+		log.info("Initiating Create Book "+LocalDateTime.now());
+		ResponseEntity<BookRespPayload> book=authorService.createBook(bookCreatePayload);
 			
+		if(book.getStatusCode()==HttpStatus.CREATED) {
+			log.info("Book Creation Successfull "+LocalDateTime.now());
+			return new ResponseEntity<>(book.getBody(),HttpStatus.CREATED);
 		}
-			
-		log.info("Recived author Id from SecurityContextHolder");
-
-		String url = "http://localhost:8085/digitalbooks/author/"+id+"/books";
-		log.info("url for create book"+ url);
-		restTemplate.postForEntity(url, bookCreatePayload, BookRespPayload.class);
-		log.info("Book Creation successfull");
-	
-	    return new ResponseEntity<BookRespPayload>(HttpStatus.CREATED);
+		log.info("Book Creation fail "+LocalDateTime.now());
+		return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
+	
 	
 	@PutMapping("/author/books/{book-id}")
 	@PreAuthorize("hasRole('AUTHOR')")
-	public ResponseEntity<BookUpdateResponse> updateBook(@PathVariable("book-id") int bookId,@RequestBody BookCreaPayload bookpayload){
-		
-
-		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		String username="";
-		if (principal instanceof UserDetails) {
-		username = ((UserDetails)principal).getUsername();
-		} else {
-		username = principal.toString();
+	public ResponseEntity<?> updateBook(@PathVariable("book-id") int bookId,@RequestBody BookCreaPayload bookpayload){
+		log.info("Initiating Book Update "+LocalDateTime.now());
+		ResponseEntity<BookRespPayload> response=authorService.updateBook(bookId, bookpayload);
+		if(response.getStatusCode()==HttpStatus.OK) {
+			log.info("Initiating Book Update Successfull "+LocalDateTime.now());
+			return new ResponseEntity<BookRespPayload>(response.getBody(),HttpStatus.OK);
 		}
-	
-		log.info(username);
-
-		Optional<User> userlogedin=userRepository.findByUsername(username);
-		long id=0;
-		log.info("Default id="+id);
-		if(userlogedin.isPresent()) {
-			String user=userlogedin.get().getUsername();
-			id=userlogedin.get().getId();
-			log.info(user);
-			
-		}
-			
-		log.info("Recived author Id from SecurityContextHolder");
-		String url="http://localhost:8085/digitalbooks/author/"+id+"/books/"+bookId;
-	
-		log.info(url);
-		
-		restTemplate.put(url,bookpayload);
-		log.info("Rest template invocked");
-		
-		return new ResponseEntity<BookUpdateResponse>(new BookUpdateResponse("Book Updated Succefully !","BookID",bookId),HttpStatus.OK);
+		log.info("Initiating Book Update Fail "+LocalDateTime.now());
+		return new ResponseEntity<BookUpdateResponse>(new BookUpdateResponse("Book Update Fail !"),HttpStatus.INTERNAL_SERVER_ERROR);
 		
 	}
-//	/api/v1/digitalbooks/author/{author-id}/books/{book-id}?block=yes
-	@PostMapping("/digitalbooks/author/books/{book-id}")
-	public ResponseEntity<BookUpdateResponse> changeBookStatus(@PathVariable("book-id") int bookId,@RequestParam(required = true) String status){
+
 	
-		if(status.equalsIgnoreCase("YES") || status.equalsIgnoreCase("NO")) {
-			
+	@PostMapping("/digitalbooks/author/books/{book-id}")
+	@PreAuthorize("hasRole('AUTHOR')")
+	ResponseEntity<BookStatus> changeBookStatus(@PathVariable("book-id") int bookId,
+			@RequestParam(required = true) String block){
+		log.info("Initiating Book Block Or UnBlock "+LocalDateTime.now());
+		boolean currentStatus=false;
+		if(block.equalsIgnoreCase("YES") || block.equalsIgnoreCase("NO")) {
+			currentStatus=authorService.changeBookStatus(bookId, block);
 		}
-		
-		return 
+		if(currentStatus) {
+			log.info("Initiating Book Block Or UnBlock Successfull "+LocalDateTime.now());
+			return new ResponseEntity<>(new BookStatus("Book Status Changed"),HttpStatus.OK); 
+		}
+		log.info("Initiating Book Block Or Fail "+LocalDateTime.now());
+		return new ResponseEntity<>(new BookStatus("Book Block UnBlock Fail"),HttpStatus.INTERNAL_SERVER_ERROR); 
 	}
 	
 	

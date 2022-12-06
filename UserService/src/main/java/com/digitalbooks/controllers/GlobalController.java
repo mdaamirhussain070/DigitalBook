@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
-
 import com.digitalbooks.authorservice.AuthorService;
 import com.digitalbooks.models.Book;
 
@@ -29,7 +27,7 @@ public class GlobalController {
 	
 		List<Book> books=authorService.getAllBooks(title, author, price, publisher);
 		
-		return new ResponseEntity<List<Book>>(books,HttpStatus.OK);
+		return new ResponseEntity<>(books,HttpStatus.OK);
 	}
 	
 	
