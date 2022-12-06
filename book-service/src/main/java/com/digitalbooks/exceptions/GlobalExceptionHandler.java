@@ -10,7 +10,6 @@ import com.digitalbooks.utility.ApiResponse;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 	
-	
 	@ExceptionHandler(ResourceNotFound.class)
 	public ResponseEntity<ApiResponse> resourceNotFoundException(ResourceNotFound ex){
 		
@@ -23,24 +22,6 @@ public class GlobalExceptionHandler {
 		
 	}
 	
-	@ExceptionHandler(ResourceAlreadyExist.class)
-	public ResponseEntity<ApiResponse> resourceAlreadyException(ResourceAlreadyExist ex){
-		
-		ApiResponse apiresponse=new ApiResponse();
-		apiresponse.setResource(ex.getResourceName());
-		apiresponse.setFieldName(ex.getFieldName());
-		apiresponse.setFieldValue(ex.getFieldValue());
-		
-	return new ResponseEntity<>(apiresponse,HttpStatus.BAD_REQUEST);
-		
-	}
-	@ExceptionHandler(RoleNotFound.class)
-	public ResponseEntity<ApiResponse> roleNotFound(RoleNotFound ex){
-		
-		ApiResponse apiresponse=new ApiResponse();
-		apiresponse.setResource(ex.getResourceName());
-	return new ResponseEntity<>(apiresponse,HttpStatus.NOT_FOUND);
-		
-	}
+	
 
 }

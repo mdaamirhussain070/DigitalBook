@@ -9,6 +9,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
@@ -52,7 +53,7 @@ public class SpringBootBookService {
 	@Test
 	public void create_Book_Test() throws Exception {
 
-		Book book = new Book(11, "Hulk", 110, 2, "comic", 50, "marvel", LocalDate.now(), LocalDate.now(), true,
+		Book book = new Book(11, "Hulk", 110, 2, "comic", 50, "marvel", LocalDateTime.now(), LocalDateTime.now(), true,
 				"Hulk is comming soon");
 
 		when(bookService.createBook(book)).thenReturn(book);
@@ -70,9 +71,9 @@ public class SpringBootBookService {
 	@Test
 	public void getAll_Book_Test() throws Exception {
 
-		Book book1 = new Book(11, "Hulk", 110, 2, "comic", 50, "marvel", LocalDate.now(), LocalDate.now(), true,
+		Book book1 = new Book(11, "Hulk", 110, 2, "comic", 50, "marvel", LocalDateTime.now(), LocalDateTime.now(), true,
 				"Hulk is comming soon");
-		Book book2 = new Book(12, "Hulk", 111, 2, "comic", 50, "marvel", LocalDate.now(), LocalDate.now(), true,
+		Book book2 = new Book(12, "Hulk", 111, 2, "comic", 50, "marvel", LocalDateTime.now(), LocalDateTime.now(), true,
 				"Hulk is comming soon");
 		List<Book> list=Arrays.asList(book1,book2);
 		

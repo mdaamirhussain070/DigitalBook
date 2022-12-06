@@ -1,6 +1,6 @@
 package com.digitalbooks.models;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -43,9 +43,9 @@ public class Book {
 	@Size(max = 120)
 	private String publisher;
 
-	private LocalDate publishedDate;
+	private LocalDateTime publishedDate;
 	
-	private LocalDate updatedOn;
+	private LocalDateTime updatedOn;
 	
 	private boolean isActive;
 	
@@ -65,7 +65,7 @@ public class Book {
 
 	public Book(int id,String title, int code, int autherId,
 			String category, double price, String publisher,
-			LocalDate publishedDate, LocalDate updatedOn, boolean isActive, String bookcontent) {
+			LocalDateTime publishedDate, LocalDateTime updatedOn, boolean isActive, String bookcontent) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -83,7 +83,7 @@ public class Book {
 
 
 	public Book(String title,int code,int autherId, String category,double price,String publisher,
-			LocalDate publishedDate, LocalDate updatedOn, boolean isActive,String bookcontent) {
+			LocalDateTime publishedDate, LocalDateTime updatedOn, boolean isActive,String bookcontent) {
 		this.title = title;
 		this.code = code;
 		this.autherId = autherId;
@@ -156,19 +156,19 @@ public class Book {
 		this.publisher = publisher;
 	}
 
-	public LocalDate getPublishedDate() {
+	public LocalDateTime getPublishedDate() {
 		return publishedDate;
 	}
 
-	public void setPublishedDate(LocalDate publishedDate) {
+	public void setPublishedDate(LocalDateTime publishedDate) {
 		this.publishedDate = publishedDate;
 	}
 
-	public LocalDate getPudatedOn() {
+	public LocalDateTime getUpdatedOn() {
 		return updatedOn;
 	}
 
-	public void setPudatedOn(LocalDate pudatedOn) {
+	public void setUpdatedOn(LocalDateTime pudatedOn) {
 		this.updatedOn = updatedOn;
 	}
 

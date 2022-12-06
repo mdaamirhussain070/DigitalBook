@@ -1,6 +1,7 @@
 package com.digitalbooks.controllers;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -11,10 +12,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.digitalbooks.exceptions.ResourceNotFound;
 import com.digitalbooks.models.Book;
 import com.digitalbooks.payload.request.BookCreaPayload;
 import com.digitalbooks.payload.response.BookRespPayload;
@@ -44,7 +47,7 @@ public class BookController {
 @PostMapping("/author/{author-id}/books")
 public ResponseEntity<BookRespPayload> createBook( @Valid @PathVariable("author-id") int authorId,@RequestBody BookCreaPayload bookpayload){
 	
-	 LocalDate now = LocalDate.now();  
+	 LocalDateTime now = LocalDateTime.now();  
 	
 	log.debug("called from User Service");
 	 
@@ -82,6 +85,21 @@ public ResponseEntity<BookRespPayload> createBook( @Valid @PathVariable("author-
 		List<Book> books=bookRepository.findAll();
 		return new ResponseEntity<List<Book>>(books,HttpStatus.OK);
 	}
+	
+	
+	@PutMapping("/author/{author-id}/books/{book-id}")
+	public ResponseEntity<BookRespPayload> updateBook(@PathVariable("author-id") int authorId,@PathVariable("book-id") int bookId,@RequestBody BookCreaPayload bookpayload){
+		
+		 BookRespPayload updatedBook=bookService.updateBook(authorId,bookId,bookpayload);
+		 
+		 if(updatedBook==null) {
+			 throw new ResourceNotFound("BOOK NOT FOUND  OR YOU ARE NOT THE AUTHER OF THIS BOOK !","BookId", bookId);
+		 }
+		
+		 return new ResponseEntity<BookRespPayload>(updatedBook,HttpStatus.OK);
+	}
+
+	
 
 }
 

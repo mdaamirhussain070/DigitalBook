@@ -19,11 +19,9 @@ import org.hibernate.validator.constraints.UniqueElements;
 
 
 
-@Entity
-@Table(	name = "tbl_book")
+
 public class Book {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+
 	private int id;
 	
 	@NotBlank
@@ -55,57 +53,10 @@ public class Book {
 	
 	private boolean isActive;
 	
-//	@OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-//	@JoinColumn(name="contentId")
 	
 	private String bookcontent;
 	
 	
-	
-
-	public Book() {
-		super();
-	}
-	
-	
-
-	public Book(int id,String title, int code, int autherId,
-			String category, double price, String publisher,
-			LocalDate publishedDate, LocalDate updatedOn, boolean isActive, String bookcontent) {
-		super();
-		this.id = id;
-		this.title = title;
-		this.code = code;
-		this.autherId = autherId;
-		this.category = category;
-		this.price = price;
-		this.publisher = publisher;
-		this.publishedDate = publishedDate;
-		this.updatedOn = updatedOn;
-		this.isActive = isActive;
-		this.bookcontent = bookcontent;
-	}
-
-
-
-	public Book(String title,int code,int autherId, String category,double price,String publisher,
-			LocalDate publishedDate, LocalDate updatedOn, boolean isActive,String bookcontent) {
-		this.title = title;
-		this.code = code;
-		this.autherId = autherId;
-		this.category = category;
-		this.price = price;
-		this.publisher = publisher;
-		this.publishedDate = publishedDate;
-		this.updatedOn = updatedOn;
-		this.isActive = isActive;
-		this.bookcontent = bookcontent;
-	}
-	
-	
-	
-	
-
 	public int getId() {
 		return id;
 	}
