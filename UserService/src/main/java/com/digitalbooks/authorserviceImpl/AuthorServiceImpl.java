@@ -19,11 +19,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.digitalbooks.authorservice.AuthorService;
-import com.digitalbooks.models.Book;
 import com.digitalbooks.models.User;
 import com.digitalbooks.payload.request.BookCreaPayload;
 import com.digitalbooks.payload.response.BookRespPayload;
 import com.digitalbooks.repository.UserRepository;
+import com.digitalbooks.utility.Book;
 import com.digitalbooks.utility.BookStatus;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;

@@ -1,7 +1,6 @@
 package com.digitalbooks.models;
 
 import java.time.LocalDateTime;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -54,19 +53,16 @@ public class Book {
 	
 	private String bookcontent;
 	
-	
-	
 
 	public Book() {
-		super();
 	}
+	
 	
 	
 
 	public Book(int id,String title, int code, int autherId,
 			String category, double price, String publisher,
 			LocalDateTime publishedDate, LocalDateTime updatedOn, boolean isActive, String bookcontent) {
-		super();
 		this.id = id;
 		this.title = title;
 		this.code = code;

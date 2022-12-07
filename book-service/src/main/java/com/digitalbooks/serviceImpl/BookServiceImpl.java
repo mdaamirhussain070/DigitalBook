@@ -3,14 +3,19 @@ package com.digitalbooks.serviceImpl;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.digitalbooks.models.Book;
+import com.digitalbooks.models.Reader;
 import com.digitalbooks.payload.request.BookCreaPayload;
+import com.digitalbooks.payload.request.BookSubscribe;
 import com.digitalbooks.payload.response.BookRespPayload;
+import com.digitalbooks.payload.response.BookSubscribeResponse;
 import com.digitalbooks.repository.BookRepository;
+import com.digitalbooks.repository.ReaderRepository;
 import com.digitalbooks.service.BookService;
 import lombok.extern.slf4j.Slf4j;
 
@@ -20,6 +25,9 @@ public class BookServiceImpl implements BookService {
 
 	@Autowired
 	private BookRepository bookRepository;
+	
+	@Autowired
+	private ReaderRepository readerRepository;
 
 	@Override
 	public BookRespPayload updateBook(int autherId, int bookId, BookCreaPayload bookUpdate) {
@@ -119,6 +127,34 @@ public class BookServiceImpl implements BookService {
 			return false;
 		}
 		return true;
+	}
+
+	@Override
+	public BookSubscribeResponse subscribeook(BookSubscribe bookSubscribe,int readerId) {
+		
+		
+		List<Reader> readers=readerRepository.findAll();
+		List<Reader> reader=readers.stream()
+		.filter(s->s.getBookId()==bookSubscribe.getBookId() && s.getReaderId()==readerId && 
+		s.getAuthorId()==bookSubscribe.getAuthorId())
+		.collect(Collectors.toList());
+		if(!reader.isEmpty()) {
+			return null;
+		}
+		
+		Reader newReader1=new Reader(bookSubscribe.getAuthorId(),readerId,bookSubscribe.getBookId(),LocalDateTime.now(),
+				bookSubscribe.getSubscriberName(),LocalDateTime.now());
+		
+		
+		Reader savedReader=readerRepository.save(newReader1);
+		
+		BookSubscribeResponse response=new BookSubscribeResponse();
+		response.setSubscriberName(savedReader.getSubscriberName());
+		response.setBookId(savedReader.getBookId());
+		response.setSubscriptionId(savedReader.getId());
+		response.setDateOfSubscription(LocalDateTime.now());
+		
+		return response;
 	}
 
 }

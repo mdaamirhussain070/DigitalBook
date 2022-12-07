@@ -71,6 +71,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/digitalbooks/author/books").authenticated()
 			.antMatchers("/digitalbooks/author/books/**").authenticated()
 			.antMatchers("/digitalbooks/author/books/{book-id}").authenticated()
+			.antMatchers("/digitalbooks/subscribe/").authenticated()
 			.anyRequest().authenticated();
 
 		http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);

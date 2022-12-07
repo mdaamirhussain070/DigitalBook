@@ -3,9 +3,10 @@ package com.digitalbooks.authorservice;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
-import com.digitalbooks.models.Book;
+
 import com.digitalbooks.payload.request.BookCreaPayload;
 import com.digitalbooks.payload.response.BookRespPayload;
+import com.digitalbooks.utility.Book;
 
 public interface AuthorService {
 	

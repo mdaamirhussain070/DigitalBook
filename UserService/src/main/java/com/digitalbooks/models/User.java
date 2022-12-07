@@ -39,13 +39,15 @@ public class User {
 
 	@Pattern(regexp="(^$|[0-9]{10})",message = "Mobile number must be 10 digits")
 	private String phoneNumber;
-
+	
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(	name = "user_roles", 
 				joinColumns = @JoinColumn(name = "user_id"), 
 				inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles = new HashSet<>();
 
+	
+	
 	public User() {
 	}
 
@@ -99,14 +101,6 @@ public class User {
 		this.password = password;
 	}
 
-	public Set<Role> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(Set<Role> roles) {
-		this.roles = roles;
-	}
-
 	public String getName() {
 		return name;
 	}
@@ -122,4 +116,14 @@ public class User {
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
+
+	public Set<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
+	
+	
 }

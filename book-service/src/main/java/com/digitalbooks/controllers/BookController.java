@@ -1,5 +1,6 @@
 package com.digitalbooks.controllers;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import javax.validation.Valid;
 
@@ -18,7 +19,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.digitalbooks.exceptions.ResourceNotFound;
 import com.digitalbooks.models.Book;
 import com.digitalbooks.payload.request.BookCreaPayload;
+import com.digitalbooks.payload.request.BookSubscribe;
 import com.digitalbooks.payload.response.BookRespPayload;
+import com.digitalbooks.payload.response.BookSubscribeError;
+import com.digitalbooks.payload.response.BookSubscribeResponse;
 import com.digitalbooks.service.BookService;
 import com.digitalbooks.utility.BookStatus;
 
@@ -84,5 +88,20 @@ public class BookController {
 		return new ResponseEntity<>(HttpStatus.OK);
 
 	}
+
+	@PostMapping("/{reader-id}/subscribe")
+	public ResponseEntity<?> subscribeook( @PathVariable("reader-id") int readerId, @RequestBody BookSubscribe bookSubscribeReq){
+		
+		log.info("Book Subscribe Started "+LocalDateTime.now());
+		BookSubscribeResponse subscribebookResp=bookService.subscribeook(bookSubscribeReq,readerId);
+		
+		if(subscribebookResp==null) {
+			log.info("Book Subscribe fail "+LocalDateTime.now());
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		log.info("Book Subscribe successfull "+LocalDateTime.now());
+		return new ResponseEntity<>(subscribebookResp,HttpStatus.CREATED); 
+	}
+	
 
 }

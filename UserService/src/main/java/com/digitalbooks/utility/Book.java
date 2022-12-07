@@ -1,4 +1,4 @@
-package com.digitalbooks.models;
+package com.digitalbooks.utility;
 
 import java.time.LocalDate;
 
