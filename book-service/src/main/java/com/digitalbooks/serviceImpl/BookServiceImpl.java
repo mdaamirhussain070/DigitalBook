@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.digitalbooks.models.Book;
+import com.digitalbooks.models.BookReaderContent;
 import com.digitalbooks.models.Reader;
 import com.digitalbooks.payload.request.BookCreaPayload;
 import com.digitalbooks.payload.request.BookSubscribe;
@@ -16,6 +17,7 @@ import com.digitalbooks.payload.response.BookRespPayload;
 import com.digitalbooks.payload.response.BookSubscribeResponse;
 import com.digitalbooks.repository.BookRepository;
 import com.digitalbooks.repository.ReaderRepository;
+import com.digitalbooks.repository.ViewRepository;
 import com.digitalbooks.service.BookService;
 import lombok.extern.slf4j.Slf4j;
 
@@ -28,6 +30,9 @@ public class BookServiceImpl implements BookService {
 	
 	@Autowired
 	private ReaderRepository readerRepository;
+	
+	@Autowired
+	private ViewRepository viewRepository;
 
 	@Override
 	public BookRespPayload updateBook(int autherId, int bookId, BookCreaPayload bookUpdate) {
@@ -157,4 +162,45 @@ public class BookServiceImpl implements BookService {
 		return response;
 	}
 
+	@Override
+	public Boolean cancelSubscribeBook(long readerId, long subscriptionId) {
+		
+		Optional<Reader> reader=readerRepository.findById(subscriptionId);
+		
+		int duration=reader.get().getDateOfSubcription().getHour();
+		if(duration>24) {
+			return false;
+		}
+		
+		if(reader.isPresent()) {
+			if(reader.get().getId()==subscriptionId) {
+				readerRepository.deleteById(reader.get().getId());
+				return true;
+			}
+		}
+		
+		return false;
+		}
+
+	@Override
+	public List<BookReaderContent> getReaderBook(long readerId) {
+		
+		List<BookReaderContent> books=viewRepository.findAllByReaderId(readerId);
+		return books;
+	}
+
+	@Override
+	public BookReaderContent getSubscribedBook(long readerId, long sbscrId) {
+		
+		BookReaderContent book=viewRepository.findByReaderIdAndSubscriptionId(readerId, sbscrId);
+		
+		return book;
+	}
+
+	@Override
+	public String getBookContent(long readerId, long sbscrId) {
+		
+		String content=viewRepository.findByContent(readerId, sbscrId);
+		return content;
+	}
 }

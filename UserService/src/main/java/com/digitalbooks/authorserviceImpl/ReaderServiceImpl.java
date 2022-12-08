@@ -1,7 +1,7 @@
 package com.digitalbooks.authorserviceImpl;
 
-import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +18,12 @@ import org.springframework.web.client.RestTemplate;
 
 import com.digitalbooks.authorservice.ReaderService;
 import com.digitalbooks.models.User;
-import com.digitalbooks.payload.request.BookCreaPayload;
+import com.digitalbooks.payload.request.BookReaderContent;
 import com.digitalbooks.payload.request.BookSubscribe;
 import com.digitalbooks.payload.request.BookSubscribeRequest;
-import com.digitalbooks.payload.response.BookRespPayload;
 import com.digitalbooks.payload.response.BookSubscribeResponse;
 import com.digitalbooks.repository.UserRepository;
+import com.digitalbooks.utility.SubscribeBookProxy;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -86,7 +86,162 @@ public class ReaderServiceImpl implements ReaderService{
 		return resp;
 		
 	}
+
+	@Override
+	public boolean cancelSubscribeBook(long subscriptionId) {
+		
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String username = "";
+		if (principal instanceof UserDetails) {
+			username = ((UserDetails) principal).getUsername();
+		} else {
+			username = principal.toString();
+		}
+
+		log.info(username);
+
+		Optional<User> userlogedin = userRepository.findByUsername(username);
+		long id = 0;
+		String readerName="";
+		log.info("Default id=" + id);
+		if (userlogedin.isPresent()) {
+			String user = userlogedin.get().getUsername();
+			id = userlogedin.get().getId();
+			readerName=userlogedin.get().getName();
+			log.info(user);
+
+		}
+
+		log.info("Recived author Id from SecurityContextHolder");
+
 	
+		
+		// ResponseEntity<BookRespPayload> response=restTemplate.postForEntity(url,
+		// bookCreatePayload, ResponseEntity.class);
+		
+		String url=	"http://localhost:8085/digitalbooks/readers/"+id+"/books/"+subscriptionId+"/cancel-subscription";
+		SubscribeBookProxy proxyy=new SubscribeBookProxy();
+		HttpHeaders headers = new HttpHeaders();
+		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+		HttpEntity<SubscribeBookProxy> entity = new HttpEntity<SubscribeBookProxy>(proxyy, headers);
+
+		ResponseEntity<?> resp = restTemplate.exchange(url, HttpMethod.POST, entity,
+				BookSubscribeResponse.class);
+		if(resp.getStatusCode()==HttpStatus.BAD_REQUEST) {
+			return false;
+		}
+
+		log.info("Book Subscription cancel successfull");
+		
+		return true;
+	}
+
+	@Override
+	public List<BookReaderContent> getReaderBook() {
+		
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String username = "";
+		if (principal instanceof UserDetails) {
+			username = ((UserDetails) principal).getUsername();
+		} else {
+			username = principal.toString();
+		}
+
+		log.info(username);
+
+		Optional<User> userlogedin = userRepository.findByUsername(username);
+		long id = 0;
+		String readerName="";
+		log.info("Default id=" + id);
+		if (userlogedin.isPresent()) {
+			String user = userlogedin.get().getUsername();
+			id = userlogedin.get().getId();
+			readerName=userlogedin.get().getName();
+			log.info(user);
+
+		}
+
+		log.info("Recived author Id from SecurityContextHolder");
+		
+		String url="http://localhost:8085/digitalbooks/readers/"+id+"/books";
+
+		List<BookReaderContent> resp = restTemplate.getForObject(url,List.class );
+
+	
+		return resp;
+	}
+	
+	
+	
+	@Override
+	public BookReaderContent getBookBySubscriptionId(long SubscriptionId) {
+		
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String username = "";
+		if (principal instanceof UserDetails) {
+			username = ((UserDetails) principal).getUsername();
+		} else {
+			username = principal.toString();
+		}
+
+		log.info(username);
+
+		Optional<User> userlogedin = userRepository.findByUsername(username);
+		long id = 0;
+		String readerName="";
+		log.info("Default id=" + id);
+		if (userlogedin.isPresent()) {
+			String user = userlogedin.get().getUsername();
+			id = userlogedin.get().getId();
+			readerName=userlogedin.get().getName();
+			log.info(user);
+
+		}
+
+		log.info("Recived author Id from SecurityContextHolder");
+		
+		String url="http://localhost:8085/digitalbooks/readers/"+id+"/books/"+SubscriptionId;
+
+		BookReaderContent resp = restTemplate.getForObject(url,BookReaderContent.class);
+
+	
+		return resp;
+	}
+	@Override
+	public String getBookContent(long subscriptionId) {
+		
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String username = "";
+		if (principal instanceof UserDetails) {
+			username = ((UserDetails) principal).getUsername();
+		} else {
+			username = principal.toString();
+		}
+
+		log.info(username);
+
+		Optional<User> userlogedin = userRepository.findByUsername(username);
+		long id = 0;
+		String readerName="";
+		log.info("Default id=" + id);
+		if (userlogedin.isPresent()) {
+			String user = userlogedin.get().getUsername();
+			id = userlogedin.get().getId();
+			readerName=userlogedin.get().getName();
+			log.info(user);
+
+		}
+
+		log.info("Recived author Id from SecurityContextHolder");
+
+		String url="http://localhost:8085/digitalbooks/readers/"+id+"/books/"+subscriptionId+"/read";
+		
+
+		String bookcontent = restTemplate.getForObject(url,String.class);
+
+	
+		return bookcontent;
+	}
 	
 	
 

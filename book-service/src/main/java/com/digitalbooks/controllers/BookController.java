@@ -18,13 +18,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.digitalbooks.exceptions.ResourceNotFound;
 import com.digitalbooks.models.Book;
+import com.digitalbooks.models.BookReaderContent;
 import com.digitalbooks.payload.request.BookCreaPayload;
 import com.digitalbooks.payload.request.BookSubscribe;
 import com.digitalbooks.payload.response.BookRespPayload;
-import com.digitalbooks.payload.response.BookSubscribeError;
 import com.digitalbooks.payload.response.BookSubscribeResponse;
+import com.digitalbooks.repository.ViewRepository;
 import com.digitalbooks.service.BookService;
 import com.digitalbooks.utility.BookStatus;
+import com.digitalbooks.utility.SubscribeBookProxy;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -35,6 +37,8 @@ public class BookController {
 
 	@Autowired
 	private BookService bookService;
+	
+
 
 	@PostMapping("/author/{author-id}/books")
 	public ResponseEntity<BookRespPayload> createBook(@Valid @PathVariable("author-id") int authorId,
@@ -103,5 +107,48 @@ public class BookController {
 		return new ResponseEntity<>(subscribebookResp,HttpStatus.CREATED); 
 	}
 	
-
+	
+	
+	@PostMapping("/readers/{reader-id}/books/{subscription-id}/cancel-subscription")
+	public ResponseEntity<?> cancelSubscribeBook(@PathVariable("reader-id") long readerId
+			,@PathVariable("subscription-id") long subscriptionId,@RequestBody SubscribeBookProxy booksSubs){
+		
+		log.info("inside canel booksubscription"+LocalDateTime.now());
+		boolean status=bookService.cancelSubscribeBook(readerId, subscriptionId);
+		
+		if(status) {
+			return new ResponseEntity<>(HttpStatus.OK);
+		}
+		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+	}
+	
+	///api/v1/digitalbooks/readers/{emailId}/books
+	
+	@GetMapping("/readers/{readerId}/books/{subscription-id}")
+	public ResponseEntity<BookReaderContent> getSubscribedBook(@PathVariable("readerId") long readerId,
+	@PathVariable("subscription-id") long sbscrId){
+	
+		BookReaderContent book=bookService.getSubscribedBook(readerId, sbscrId);
+		
+		return new ResponseEntity<>(book,HttpStatus.OK);
+		
+	}
+	
+	@GetMapping("/readers/{readerId}/books")
+	public ResponseEntity<List<BookReaderContent>> getReaderBook(@PathVariable("readerId") long readerId){
+		
+		List<BookReaderContent> readerbook=bookService.getReaderBook(readerId);
+		
+		return new ResponseEntity<>(readerbook,HttpStatus.OK);
+	}
+	@GetMapping("/readers/{readerId}/books/{subscription-id}/read")
+	public ResponseEntity<String> getBookContent(@PathVariable("readerId") long readerId,
+			@PathVariable("subscription-id") long sbscrId){
+		
+		String bookContent=bookService.getBookContent(readerId, sbscrId);
+		
+		return new ResponseEntity<>(bookContent.toUpperCase(),HttpStatus.OK);
+	}
+	
+	
 }
