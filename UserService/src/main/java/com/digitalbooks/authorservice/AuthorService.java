@@ -15,7 +15,7 @@ public interface AuthorService {
 	
 	ResponseEntity<BookRespPayload> updateBook(int bookId,BookCreaPayload bookpayload);
 	 
-	List<Book> getAllBooks(String title,String author, double price,String publisher);
+	List<Book> getAllBooks(String title,String author,String category, double price,String publisher);
 	
 	boolean changeBookStatus(int bookId,String status);
 	

@@ -40,7 +40,7 @@ public class AuthorServiceImpl implements AuthorService {
 	private UserRepository userRepository;
 
 	@Override
-	public List<Book> getAllBooks(String title, String author, double price, String publisher) {
+	public List<Book> getAllBooks(String title, String author,String category, double price, String publisher) {
 
 		String url = "http://localhost:8085/digitalbooks/";
 		List<Book> books = restTemplate.getForObject(url, List.class);

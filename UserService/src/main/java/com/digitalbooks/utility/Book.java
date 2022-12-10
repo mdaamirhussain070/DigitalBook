@@ -47,93 +47,161 @@ public class Book {
 	private String bookcontent;
 	
 	
+	
+
 	public int getId() {
 		return id;
 	}
+
+
+
 
 	public void setId(int id) {
 		this.id = id;
 	}
 
+
+
+
 	public String getTitle() {
 		return title;
 	}
+
+
+
 
 	public void setTitle(String title) {
 		this.title = title;
 	}
 
+
+
+
 	public int getCode() {
 		return code;
 	}
+
+
+
 
 	public void setCode(int code) {
 		this.code = code;
 	}
 
+
+
+
 	public int getAutherId() {
 		return autherId;
 	}
+
+
+
 
 	public void setAutherId(int autherId) {
 		this.autherId = autherId;
 	}
 
+
+
+
 	public String getCategory() {
 		return category;
 	}
+
+
+
 
 	public void setCategory(String category) {
 		this.category = category;
 	}
 
+
+
+
 	public double getPrice() {
 		return price;
 	}
+
+
+
 
 	public void setPrice(double price) {
 		this.price = price;
 	}
 
+
+
+
 	public String getPublisher() {
 		return publisher;
 	}
+
+
+
 
 	public void setPublisher(String publisher) {
 		this.publisher = publisher;
 	}
 
+
+
+
 	public LocalDate getPublishedDate() {
 		return publishedDate;
 	}
+
+
+
 
 	public void setPublishedDate(LocalDate publishedDate) {
 		this.publishedDate = publishedDate;
 	}
 
-	public LocalDate getPudatedOn() {
+
+
+
+	public LocalDate getUpdatedOn() {
 		return updatedOn;
 	}
 
-	public void setPudatedOn(LocalDate updatedOn) {
+
+
+
+	public void setUpdatedOn(LocalDate updatedOn) {
 		this.updatedOn = updatedOn;
 	}
+
+
+
 
 	public boolean isActive() {
 		return isActive;
 	}
 
+
+
+
 	public void setActive(boolean isActive) {
 		this.isActive = isActive;
 	}
+
+
+
 
 	public String getBookcontent() {
 		return bookcontent;
 	}
 
+
+
+
 	public void setBookcontent(String bookcontent) {
 		this.bookcontent = bookcontent;
 	}
+
+
+
 
 	@Override
 	public String toString() {

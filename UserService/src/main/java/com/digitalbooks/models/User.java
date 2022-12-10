@@ -20,24 +20,24 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotBlank
-	@Size(min=3,max=50)
+//	@NotBlank
+//	@Size(min=3,max=50)
 	private String name;  // User name Required
-	@NotBlank
-	@Size(max = 20)
+//	@NotBlank
+//	@Size(max = 20)
 	private String username;
 
-	@NotBlank
-	@Size(max = 50)
-	@Email
+//	@NotBlank
+//	@Size(max = 50)
+//	@Email
 	private String email;
 
-	@NotBlank
-	@Size(max = 120)
+//	@NotBlank
+//	@Size(max = 120)
 	private String password;
 	
 
-	@Pattern(regexp="(^$|[0-9]{10})",message = "Mobile number must be 10 digits")
+//	@Pattern(regexp="(^$|[0-9]{10})",message = "Mobile number must be 10 digits")
 	private String phoneNumber;
 	
 	@ManyToMany(fetch = FetchType.LAZY)

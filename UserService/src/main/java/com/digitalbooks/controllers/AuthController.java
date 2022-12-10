@@ -35,7 +35,8 @@ import com.digitalbooks.security.jwt.JwtUtils;
 import com.digitalbooks.security.services.UserDetailsImpl;
 import com.digitalbooks.utility.RegistrationResponse;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+//@CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin(origins="*")
 @RestController
 @RequestMapping("/digitalbooks")
 public class AuthController {
