@@ -13,6 +13,7 @@ import { HeaderComponent } from './header/header/header.component';
 import { LoginComponent } from './components/login/login.component';
 
 import { AuthordashboardComponent } from './components/authordashboard/authordashboard.component';
+import { ReaderdashboardComponent } from './components/readerdashboard/readerdashboard.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { AuthordashboardComponent } from './components/authordashboard/authordas
     HeaderComponent,
     LoginComponent,
    
-    AuthordashboardComponent
+    AuthordashboardComponent,
+        ReaderdashboardComponent
   ],
   imports: [
     BrowserModule,
