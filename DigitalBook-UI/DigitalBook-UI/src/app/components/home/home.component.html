@@ -1,0 +1,85 @@
+<app-header></app-header>
+<div calss="hom">
+<form class="border p-3 rounded" [formGroup]="searchBookForm" (ngSubmit)="searBook()"  #form="ngForm" [hidden]="form.submitted">
+    <div class="row g-0">
+        <div class="col text-center p-2 mb-3 bg-light">
+            <span class="fs-3">Search Book</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col mb-3" >
+            <label for="title" class="form-label">Title</label>
+            
+        </div>
+        <div class="col mb-3 " >
+            <input type="text" class="form-control" id="title"formControlName="title" >
+        </div>
+    </div>
+    <div class="row">
+        <div class="col mb-3">
+            <label for="author" class="form-label">Author</label>
+        </div>
+        <div class="col mb-3">
+            <input type="ext" class="form-control" id="author" formControlName="author"/>
+        </div>
+    </div>
+    <div class="row mb-3" >
+        <div class="col ps-3">
+            <label for="publisher" class="form-label">Publisher </label>
+        </div>
+        <div class="col ps-3">
+            <input type="text" class="form-control" id="publisher" formControlName="publisher"/>
+        </div>
+    </div>
+    <div class="row mb-3" >
+        <div class="col ps-3">
+            <label for="price" class="form-label">Price</label>
+        </div>
+        <div class="col ps-3">
+            <input type="text" class="form-control" id="price" formControlName="price" />
+        </div>
+    </div>
+      <div class="row">
+        <div class="col-6 offset-3">
+            <div class="d-grid">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+        </div>
+      </div>  
+</form>
+</div>
+<div  *ngIf="ngbook?.length" >
+    <h3>Search Result</h3>
+    <table class="table table-striped table-hover" >  
+    <thead class="table-dark">  
+      <tr>  
+        <th scope="col">ID</th>  
+        <th scope="col">Title</th>  
+        <th scope="col">Code</th>  
+        <th scope="col" >Auther ID </th>  
+        <th scope="col" >Category</th>  
+        <th scope="col" >Price</th>  
+        <th scope="col" >Publisher</th>  
+        <th scope="col" >Publish Date </th>  
+        <th scope="col" >Status</th>  
+        <th scope="col" >UpdatedOn</th>  
+      </tr>  
+    </thead>  
+    <tbody>  
+            <tr *ngFor="let p of ngbook">   
+              <td>{{p.id}}</td>   
+              <td>{{p.title}}</td>   
+              <td>{{p.code}}</td>   
+              <td>{{p.autherId}}</td> 
+              <td>{{p.category}}</td> 
+              <td>{{p.price}}</td> 
+              <td>{{p.publisher}}</td>    
+              <td>{{p.publishedDate}}</td>    
+              <td>{{p.active}}</td>    
+              <td>{{p.updatedOn}}</td>    
+              </tr>  
+              <tr>  
+            </tbody>  
+          </table>  
+</div>
+

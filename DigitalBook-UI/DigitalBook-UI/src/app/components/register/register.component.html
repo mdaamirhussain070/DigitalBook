@@ -1,0 +1,67 @@
+
+<app-header></app-header>
+
+<div calss="container">
+    <p class="text-left fs-8" [ngClass]="isAccountCreate ? 'text-success pb-1': 'text-danger'">
+        {{result}}
+        </p>
+
+  <form [formGroup]= "registerForm"  (ngSubmit)="registerSumbited()"  class="border p-3 rounded">
+    <div class="row g-0">
+        <div class="col text-center p-2 mb-3 bg-light">
+            <span class="fs-3">Register</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col mb-3" >
+            <label for="name" class="form-label">Name</label>
+            
+            <input type="text" class="form-control" id="name" formControlName="name">
+            <div class="form-text text-danger" *ngIf="Name.errors?.['required'] && (Name.touched || Name.dirty)">Name is rquired</div>
+            <div class="form-text text-danger" *ngIf="Name.errors?.['minlength'] && (Name.touched || Name.dirty)">Name is too short</div> 
+            <div class="form-text text-danger" *ngIf="Name.errors?.['pattern'] && (Name.touched || Name.dirty)">Name should start with alphabat</div>    
+        </div>
+        <div class="col mb-3">
+            <label for="username" class="form-label">User Name</label>
+            <input type="text" class="form-control" id="username" formControlName="username"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" formControlName="email"/>
+            <div class="form-text text-danger" *ngIf="Email.errors?.['required'] && (Email.touched || Email.dirty)">Name is rquired</div>
+            <div class="form-text text-danger" *ngIf="Email.errors?.['email'] && (Email.touched || Email.dirty)">Name is too short</div>
+        </div>
+        <div class="col mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" formControlName="password"/>
+        </div>
+    </div>
+      <div class="row mb-3" >
+        <div class="col ps-3">
+            <label for="phonenumber" class="form-label">Phone Number</label>
+            <input type="text" class="form-control" id="phonenumber" formControlName="phonenumber"/>
+        </div>
+        <div class="col ps-3">
+            <div class="m-1">Role</div>
+            <div class="form-check form-check-inline">
+                <input type="radio" class="form-check-input" value="AUTHOR" id="author" formControlName="role">
+                <label for="author" class="form-check-label">AUTHOR</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input type="radio" class="form-check-input" value="READER" id="reader" formControlName="role">
+                <label for="reader" class="form-check-label">READER</label>
+            </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6 offset-3">
+            <div class="d-grid">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+      </div>  
+</form>
+</div>
+

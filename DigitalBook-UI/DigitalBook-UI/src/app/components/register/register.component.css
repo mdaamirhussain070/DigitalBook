@@ -1,0 +1,14 @@
+form{
+    width: 500px;
+    margin-left: 400px;
+}
+.container{ 
+    height: 100vh;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    margin-left: 400px;
+}
+p{
+    margin-left: 400px;
+}
