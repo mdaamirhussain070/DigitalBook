@@ -16,6 +16,7 @@ import { AuthordashboardComponent } from './components/authordashboard/authordas
 import { ReaderdashboardComponent } from './components/readerdashboard/readerdashboard.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { CreatebookComponent } from './components/createbook/createbook.component';
+import { UpdatebookComponent } from './components/updatebook/updatebook.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { CreatebookComponent } from './components/createbook/createbook.componen
     AuthordashboardComponent,
         ReaderdashboardComponent,
         LogoutComponent,
-        CreatebookComponent
+        CreatebookComponent,
+        UpdatebookComponent
   ],
   imports: [
     BrowserModule,

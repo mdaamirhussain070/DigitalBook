@@ -7,6 +7,7 @@ import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { ReaderdashboardComponent } from './components/readerdashboard/readerdashboard.component';
 import { RegisterComponent } from './components/register/register.component';
+import { UpdatebookComponent } from './components/updatebook/updatebook.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'readerdashboard', component: ReaderdashboardComponent},
   { path: 'logout',component: LogoutComponent},
   { path: 'createbook',component: CreatebookComponent},
+  { path: 'updatebook',component: UpdatebookComponent},
 
 ];
 
