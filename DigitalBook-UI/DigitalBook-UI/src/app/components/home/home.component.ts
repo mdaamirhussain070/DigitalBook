@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Book } from 'src/app/book.model';
 import { HomeService } from 'src/app/services/home.service';
 
@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit{
     this.book;
   }
   searchBookForm=new FormGroup({
-      title:new FormControl(""),
+      title:new FormControl("",[Validators.required]),
       author:new FormControl(""),
       publisher:new FormControl(""),
       price:new FormControl(""),

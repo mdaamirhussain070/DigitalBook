@@ -47,12 +47,12 @@ public class AuthorServiceImpl implements AuthorService {
 		log.info("User Service connected with Book Service Application");
 		if (title != null) {
 			List<Book> bookList = jsonToJava(books);
-			return bookList.stream().filter((t) -> t.getTitle().equalsIgnoreCase(title)).collect(Collectors.toList());
+			return bookList.stream().filter(t -> t.getTitle().equalsIgnoreCase(title)).collect(Collectors.toList());
 		}
 
 		if (price != 0) {
 			List<Book> bookList = jsonToJava(books);
-			List<Book> bookWithPrice = bookList.stream().filter((t) -> t.getPrice() == price)
+			List<Book> bookWithPrice = bookList.stream().filter(t -> t.getPrice() == price)
 					.collect(Collectors.toList());
 			return bookWithPrice;
 		}
@@ -66,7 +66,7 @@ public class AuthorServiceImpl implements AuthorService {
 
 		if (publisher != null) {
 			List<Book> bookList = jsonToJava(books);
-			List<Book> bookWithPublisher = bookList.stream().filter((t) -> t.getPublisher().equalsIgnoreCase(publisher))
+			List<Book> bookWithPublisher = bookList.stream().filter(t -> t.getPublisher().equalsIgnoreCase(publisher))
 					.collect(Collectors.toList());
 
 			return bookWithPublisher;
@@ -108,13 +108,13 @@ public class AuthorServiceImpl implements AuthorService {
 
 		Optional<User> userlogedin = userRepository.findByUsername(username);
 		long id = 0;
-		log.info("Default id=" + id);
+		
 		if (userlogedin.isPresent()) {
 			String user = userlogedin.get().getUsername();
 			id = userlogedin.get().getId();
 			log.info(user);
 			log.info(user);
-			System.out.println(id);
+		
 		}
 
 		String url ="http://localhost:8085/digitalbooks/author/"+id+"/books/"+bookId+"/status?block="+block;
@@ -167,7 +167,7 @@ public class AuthorServiceImpl implements AuthorService {
 
 		HttpHeaders headers = new HttpHeaders();
 		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-		HttpEntity<BookCreaPayload> entity = new HttpEntity<BookCreaPayload>(bookCreatePayload, headers);
+		HttpEntity<BookCreaPayload> entity = new HttpEntity<>(bookCreatePayload, headers);
 
 		ResponseEntity<BookRespPayload> resp = restTemplate.exchange(url, HttpMethod.POST, entity,
 				BookRespPayload.class);
@@ -209,7 +209,7 @@ public class AuthorServiceImpl implements AuthorService {
 		
 		HttpHeaders headers = new HttpHeaders();
 		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-		HttpEntity<BookCreaPayload> entity = new HttpEntity<BookCreaPayload>(bookpayload, headers);
+		HttpEntity<BookCreaPayload> entity = new HttpEntity<>(bookpayload, headers);
 
 		ResponseEntity<BookRespPayload> resp = restTemplate.exchange(url, HttpMethod.PUT, entity,
 				BookRespPayload.class);

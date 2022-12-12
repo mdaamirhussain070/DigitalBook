@@ -20,10 +20,10 @@ export class RegisterComponent implements OnInit{
 
   registerForm=new FormGroup({
     name:new FormControl("",[Validators.required,Validators.min(3),Validators.pattern("[a-zA-Z].*")]),
-    username:new FormControl(""),
+    username:new FormControl("",[Validators.required]),
     email:new FormControl("",[Validators.email,Validators.required]),
-    password:new FormControl(""),
-    phonenumber:new FormControl(""),
+    password:new FormControl("",[Validators.required]),
+    phonenumber:new FormControl("",[Validators.required]),
     role:new FormControl("")
 
 });

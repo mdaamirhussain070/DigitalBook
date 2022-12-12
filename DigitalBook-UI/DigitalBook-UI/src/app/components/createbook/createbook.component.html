@@ -1,0 +1,64 @@
+<app-header></app-header>
+<form class="border p-3 rounded"  [formGroup]="createBookForm"  (ngSubmit)="createBook()">
+    <div class="row g-0">
+        <div class="col text-center p-2 mb-3 bg-light">
+            <span class="fs-3">Create Book</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col mb-3" >
+            <label for="title" class="form-label">Title</label>
+            
+        </div>
+        <div class="col mb-3 " >
+            <input type="text" class="form-control" id="title"formControlName="title" >
+        </div>
+    </div>
+    <div class="row">
+        <div class="col mb-3">
+            <label for="code" class="form-label">Code</label>
+        </div>
+        <div class="col mb-3">
+            <input type="ext" class="form-control" id="code" formControlName="code"/>
+        </div>
+    </div>
+    <div class="row mb-3" >
+        <div class="col ps-3">
+            <label for="publisher" class="form-label">Publisher </label>
+        </div>
+        <div class="col ps-3">
+            <input type="text" class="form-control" id="publisher" formControlName="publisher"/>
+        </div>
+    </div>
+    <div class="row mb-3" >
+        <div class="col ps-3">
+            <label for="price" class="form-label">Price</label>
+        </div>
+        <div class="col ps-3">
+            <input type="text" class="form-control" id="price" formControlName="price" />
+        </div>
+    </div>
+    <div class="row mb-3" >
+        <div class="col ps-3">
+            <label for="category" class="form-label">Category</label>
+        </div>
+        <div class="col ps-3">
+            <input type="text" class="form-control" id="category" formControlName="category" />
+        </div>
+    </div>
+    <div class="row mb-3" >
+        <div class="col ps-3">
+            <label for="content" class="form-label">Content</label>
+        </div>
+        <div class="col ps-3">
+            <input type="teaxtarea" class="form-control" id="content" formControlName="content" />
+        </div>
+    </div>
+      <div class="row">
+        <div class="col-6 offset-3">
+            <div class="d-grid">
+                <button type="submit" class="btn btn-primary">Create</button>
+            </div>
+        </div>
+      </div>  
+</form>

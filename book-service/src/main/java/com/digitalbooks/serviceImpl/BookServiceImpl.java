@@ -167,12 +167,14 @@ public class BookServiceImpl implements BookService {
 		
 		Optional<Reader> reader=readerRepository.findById(subscriptionId);
 		
-		int duration=reader.get().getDateOfSubcription().getHour();
-		if(duration>24) {
-			return false;
-		}
+		
 		
 		if(reader.isPresent()) {
+			int duration=reader.get().getDateOfSubcription().getHour();
+			if(duration>24) {
+				return false;
+			}
+			
 			if(reader.get().getId()==subscriptionId) {
 				readerRepository.deleteById(reader.get().getId());
 				return true;

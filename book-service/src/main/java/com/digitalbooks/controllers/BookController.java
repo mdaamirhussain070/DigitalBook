@@ -46,14 +46,14 @@ public class BookController {
 
 		log.debug("called from User Service");
 		BookRespPayload resp = bookService.createBook(authorId, bookpayload);
-		return new ResponseEntity<BookRespPayload>(resp, HttpStatus.CREATED);
+		return new ResponseEntity<>(resp, HttpStatus.CREATED);
 	}
 
 	@GetMapping()
 	public ResponseEntity<List<Book>> getAllBooks() {
 
 		List<Book> books = bookService.getAllBooks();
-		return new ResponseEntity<List<Book>>(books, HttpStatus.OK);
+		return new ResponseEntity<>(books, HttpStatus.OK);
 	}
 
 	@PutMapping("/author/{author-id}/books/{book-id}")
@@ -66,7 +66,7 @@ public class BookController {
 			throw new ResourceNotFound("BOOK NOT FOUND  OR YOU ARE NOT THE AUTHER OF THIS BOOK !", "BookId", bookId);
 		}
 
-		return new ResponseEntity<BookRespPayload>(updatedBook, HttpStatus.OK);
+		return new ResponseEntity<>(updatedBook, HttpStatus.OK);
 	}
 
 	@GetMapping("/book/{book-id}")
@@ -77,7 +77,7 @@ public class BookController {
 			throw new ResourceNotFound("Book", "BookId", bookId);
 		}
 
-		return new ResponseEntity<Book>(book, HttpStatus.OK);
+		return new ResponseEntity<>(book, HttpStatus.OK);
 	}
 
 	@PostMapping("/author/{auther-id}/books/{book-id}/status")

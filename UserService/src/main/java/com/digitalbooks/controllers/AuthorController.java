@@ -56,10 +56,10 @@ public class AuthorController {
 		ResponseEntity<BookRespPayload> response=authorService.updateBook(bookId, bookpayload);
 		if(response.getStatusCode()==HttpStatus.OK) {
 			log.info("Initiating Book Update Successfull "+LocalDateTime.now());
-			return new ResponseEntity<BookRespPayload>(response.getBody(),HttpStatus.OK);
+			return new ResponseEntity<>(response.getBody(),HttpStatus.OK);
 		}
 		log.info("Initiating Book Update Fail "+LocalDateTime.now());
-		return new ResponseEntity<BookUpdateResponse>(new BookUpdateResponse("Book Update Fail !"),HttpStatus.INTERNAL_SERVER_ERROR);
+		return new ResponseEntity<>(new BookUpdateResponse("Book Update Fail !"),HttpStatus.INTERNAL_SERVER_ERROR);
 		
 	}
 

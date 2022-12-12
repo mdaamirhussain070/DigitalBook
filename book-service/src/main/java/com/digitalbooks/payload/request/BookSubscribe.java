@@ -1,7 +1,5 @@
 package com.digitalbooks.payload.request;
 
-import java.time.LocalDateTime;
-
 public class BookSubscribe {
 	
 	private long authorId;

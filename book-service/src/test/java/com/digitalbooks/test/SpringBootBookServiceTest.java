@@ -31,8 +31,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RunWith(SpringRunner.class)
 
-@SpringBootTest(webEnvironment = WebEnvironment.MOCK, classes = { SpringBootBookService.class })
-public class SpringBootBookService {
+@SpringBootTest(webEnvironment = WebEnvironment.MOCK, classes = { SpringBootBookServiceTest.class })
+public class SpringBootBookServiceTest {
 
 	private MockMvc mockMvc;
 

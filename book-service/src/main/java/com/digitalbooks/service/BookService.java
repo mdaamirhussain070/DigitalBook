@@ -2,9 +2,6 @@ package com.digitalbooks.service;
 
 import java.util.List;
 
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-
 import com.digitalbooks.models.Book;
 import com.digitalbooks.models.BookReaderContent;
 import com.digitalbooks.payload.request.BookCreaPayload;
