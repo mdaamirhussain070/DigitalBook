@@ -17,6 +17,7 @@ import { ReaderdashboardComponent } from './components/readerdashboard/readerdas
 import { LogoutComponent } from './components/logout/logout.component';
 import { CreatebookComponent } from './components/createbook/createbook.component';
 import { UpdatebookComponent } from './components/updatebook/updatebook.component';
+import { BlockorunblockComponent } from './components/blockorunblock/blockorunblock.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { UpdatebookComponent } from './components/updatebook/updatebook.componen
         ReaderdashboardComponent,
         LogoutComponent,
         CreatebookComponent,
-        UpdatebookComponent
+        UpdatebookComponent,
+        BlockorunblockComponent
   ],
   imports: [
     BrowserModule,
