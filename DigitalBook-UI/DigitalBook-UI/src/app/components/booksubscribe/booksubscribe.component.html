@@ -1,0 +1,46 @@
+<app-header></app-header>
+
+
+<div calss="container" >
+    <br>
+    <div routerLink="/authordashboard" >
+        <button>Go Back To DashBoard</button>
+    </div>
+    <p class="text-left fs-8" [ngClass]="isUpdated ? 'text-success pb-1': 'text-danger'">
+        {{result}}
+        </p>
+<form class="border p-3 rounded"  [formGroup]="subscribeBookForm"  (ngSubmit)="subscribeBook()">
+    <div class="row g-0">
+        <div class="col text-center p-2 mb-3 bg-light">
+            <span class="fs-3">Block Unblock Book </span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col mb-3">
+            <label for="bookId" class="form-label">Book Id</label>
+        </div>
+        <div class="col mb-3">
+            <input type="text" class="form-control" id="bookId" formControlName="bookId" />
+            <div class="form-text text-danger" *ngIf="BookId.errors?.['required'] && (BookId.touched || BookId.dirty)">Book ID is rquired</div>
+        </div>
+       
+    </div>
+    <div class="row mb-3">
+        <div class="col mb-3">
+            <label for="bookId" class="form-label">Author ID</label>
+        </div>
+        <div class="col mb-3">
+            <input type="text" class="form-control" id="autherId" formControlName="authorId" />
+            <div class="form-text text-danger" *ngIf="BookId.errors?.['required'] && (BookId.touched || BookId.dirty)">Author ID is rquired</div>
+        </div>
+        
+    </div>
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="d-grid">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+      </div>  
+</form>
+</div>

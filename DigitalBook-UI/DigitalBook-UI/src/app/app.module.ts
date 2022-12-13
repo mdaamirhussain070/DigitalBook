@@ -18,6 +18,7 @@ import { LogoutComponent } from './components/logout/logout.component';
 import { CreatebookComponent } from './components/createbook/createbook.component';
 import { UpdatebookComponent } from './components/updatebook/updatebook.component';
 import { BlockorunblockComponent } from './components/blockorunblock/blockorunblock.component';
+import { BooksubscribeComponent } from './components/booksubscribe/booksubscribe.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { BlockorunblockComponent } from './components/blockorunblock/blockorunbl
         LogoutComponent,
         CreatebookComponent,
         UpdatebookComponent,
-        BlockorunblockComponent
+        BlockorunblockComponent,
+        BooksubscribeComponent
   ],
   imports: [
     BrowserModule,

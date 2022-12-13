@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthordashboardComponent } from './components/authordashboard/authordashboard.component';
 import { BlockorunblockComponent } from './components/blockorunblock/blockorunblock.component';
+import { BooksubscribeComponent } from './components/booksubscribe/booksubscribe.component';
 import { CreatebookComponent } from './components/createbook/createbook.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'createbook',component: CreatebookComponent},
   { path: 'updatebook',component: UpdatebookComponent},
   { path: 'blockorunblock',component: BlockorunblockComponent},
+  { path: 'booksubscribe',component: BooksubscribeComponent},
 
 ];
 
