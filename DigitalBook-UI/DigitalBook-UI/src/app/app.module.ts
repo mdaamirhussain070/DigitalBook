@@ -19,6 +19,7 @@ import { CreatebookComponent } from './components/createbook/createbook.componen
 import { UpdatebookComponent } from './components/updatebook/updatebook.component';
 import { BlockorunblockComponent } from './components/blockorunblock/blockorunblock.component';
 import { BooksubscribeComponent } from './components/booksubscribe/booksubscribe.component';
+import { ViewallsubscribedbookComponent } from './components/viewallsubscribedbook/viewallsubscribedbook.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { BooksubscribeComponent } from './components/booksubscribe/booksubscribe
         CreatebookComponent,
         UpdatebookComponent,
         BlockorunblockComponent,
-        BooksubscribeComponent
+        BooksubscribeComponent,
+        ViewallsubscribedbookComponent
   ],
   imports: [
     BrowserModule,

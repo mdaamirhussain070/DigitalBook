@@ -78,7 +78,7 @@
             <label for="content" class="form-label">Content</label>
         </div>
         <div class="col mb-3">
-            <textarea class="form-control" id="content" formControlName="content" ></textarea>
+            <textarea class="form-control" id="content" formControlName="content"></textarea>
             <div class="form-text text-danger" *ngIf="Content.errors?.['required'] && (Content.touched || Content.dirty)">Book content is rquired</div>
         </div>
         

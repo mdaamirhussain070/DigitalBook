@@ -10,6 +10,7 @@ import { LogoutComponent } from './components/logout/logout.component';
 import { ReaderdashboardComponent } from './components/readerdashboard/readerdashboard.component';
 import { RegisterComponent } from './components/register/register.component';
 import { UpdatebookComponent } from './components/updatebook/updatebook.component';
+import { ViewallsubscribedbookComponent } from './components/viewallsubscribedbook/viewallsubscribedbook.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'updatebook',component: UpdatebookComponent},
   { path: 'blockorunblock',component: BlockorunblockComponent},
   { path: 'booksubscribe',component: BooksubscribeComponent},
+  { path: 'viewallsubscribedbook',component: ViewallsubscribedbookComponent},
 
 ];
 

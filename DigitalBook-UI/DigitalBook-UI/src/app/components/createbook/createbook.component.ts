@@ -10,7 +10,9 @@ import { CeatebookService } from 'src/app/services/ceatebook.service';
   styleUrls: ['./createbook.component.css']
 })
 export class CreatebookComponent {
+  [x: string]: any;
   result : String='';
+  str:string[] | undefined;
   isAccountCreate: boolean | undefined;
 
   constructor(public bookService:CeatebookService){}
@@ -20,14 +22,15 @@ export class CreatebookComponent {
     code:new FormControl("",[Validators.required]),
     publisher:new FormControl("",[Validators.required]),
     category:new FormControl("",[Validators.required]),
-    content:new FormControl("",[Validators.required]),
+    content:new FormControl(['section'],[Validators.required]),
     price:new FormControl("",[Validators.required]),
     status:new FormControl("",[Validators.required]),
 });
 
 createBookReq=new BookCreRequest();
-
+//str=this.createBookForm.controls['content'];
 createBook(){
+ // content:String[] =this.createBookForm.controls['content'];
   console.log("This is data from form")
   //console.log(this.createBookForm.value);
   this.createBookReq.Title=this.Title.value;
@@ -37,10 +40,14 @@ createBook(){
   this.createBookReq.Publisher=this.Publisher.value;
   this.createBookReq.Code=this.Code.value;
   this.createBookReq.Status=this.Status.value;
-  this.createBookReq.Content=this.Content.value;
+  this.createBookReq.Content= this.Content.value;
+  //this.createBookForm.controls['content'];
+ // this.createBookReq.Content=this.str;
 
   console.log("Book Request");
   console.log(this.createBookReq);
+
+  console.log(" Calling Create Request")
   this.bookService.createBookService(this.createBookReq).subscribe(repdata=>{
     console.log(repdata)
 
