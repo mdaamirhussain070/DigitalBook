@@ -12,7 +12,7 @@ export class BooksubscribeComponent {
   result : String='';
   isUpdated: boolean | undefined;
 
-  constructor(public subscribeBookservice:BooksubscribeService){}
+  constructor(private subscribeBookservice:BooksubscribeService){}
 
   subscribeBookForm=new FormGroup({
     bookId:new FormControl("",[Validators.required]),

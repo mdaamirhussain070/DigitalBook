@@ -6,17 +6,17 @@ export class BookCreRequest {
     public price:number;
     public publisher:string;
     public status:boolean
-    public content:string;
+    public bookcontent:string;
     constructor(title?:string,code?:number,
         category?:string,price?:number,publisher?:string,
-        status?:boolean,content?:string){
+        status?:boolean,bookcontent?:string){
             this.title=title ||"",
             this.code=code ||0,
             this.category=category ||"",
             this.price=price|| 0,
             this.publisher=publisher||"",
             this.status=status || false,
-            this.content=content || ""
+            this.bookcontent=bookcontent || ""
         }
         
        
@@ -40,8 +40,8 @@ export class BookCreRequest {
         get Status():boolean{
             return this.status as boolean;
         }
-        get Content():string{
-            return this.content as string;
+        get BookContent():string{
+            return this.bookcontent as string;
         }
 
         set Title(title:string){
@@ -63,8 +63,8 @@ export class BookCreRequest {
             this.status=status;
         }
 
-        set Content(content:string){
-            this.content=content;
+        set BookContent(bookcontent:string){
+            this.bookcontent=bookcontent;
         }
 
 }

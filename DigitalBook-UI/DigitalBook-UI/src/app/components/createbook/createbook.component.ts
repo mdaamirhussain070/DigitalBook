@@ -12,27 +12,26 @@ import { CeatebookService } from 'src/app/services/ceatebook.service';
 export class CreatebookComponent {
   [x: string]: any;
   result : String='';
-  str:string[] | undefined;
   isAccountCreate: boolean | undefined;
 
-  constructor(public bookService:CeatebookService){}
+  constructor(private bookService:CeatebookService){}
 
   createBookForm=new FormGroup({
     title:new FormControl("",[Validators.required]),
     code:new FormControl("",[Validators.required]),
     publisher:new FormControl("",[Validators.required]),
     category:new FormControl("",[Validators.required]),
-    content:new FormControl(['section'],[Validators.required]),
+    bookContent:new FormControl("",[Validators.required]),
     price:new FormControl("",[Validators.required]),
     status:new FormControl("",[Validators.required]),
 });
 
 createBookReq=new BookCreRequest();
-//str=this.createBookForm.controls['content'];
+
 createBook(){
- // content:String[] =this.createBookForm.controls['content'];
+
   console.log("This is data from form")
-  //console.log(this.createBookForm.value);
+ 
   this.createBookReq.Title=this.Title.value;
   this.createBookReq.Code=this.Code.value;
   this.createBookReq.Price=this.Price.value;
@@ -40,9 +39,12 @@ createBook(){
   this.createBookReq.Publisher=this.Publisher.value;
   this.createBookReq.Code=this.Code.value;
   this.createBookReq.Status=this.Status.value;
-  this.createBookReq.Content= this.Content.value;
+  this.createBookReq.BookContent=this.BookContent.value;
+
   //this.createBookForm.controls['content'];
- // this.createBookReq.Content=this.str;
+ // this.createBookReq.Content=this.BookContent;
+ console.log(this.BookContent);
+
 
   console.log("Book Request");
   console.log(this.createBookReq);
@@ -75,8 +77,8 @@ get Publisher():FormControl{
 get Category():FormControl{
   return this.createBookForm.get("category") as FormControl;
 }
-get Content():FormControl{
-  return this.createBookForm.get("content") as FormControl;
+get BookContent():FormControl{
+  return this.createBookForm.get("bookContent") as FormControl;
 }
 get Price():FormControl{
   return this.createBookForm.get("price") as FormControl;

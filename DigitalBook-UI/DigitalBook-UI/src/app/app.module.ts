@@ -20,6 +20,7 @@ import { UpdatebookComponent } from './components/updatebook/updatebook.componen
 import { BlockorunblockComponent } from './components/blockorunblock/blockorunblock.component';
 import { BooksubscribeComponent } from './components/booksubscribe/booksubscribe.component';
 import { ViewallsubscribedbookComponent } from './components/viewallsubscribedbook/viewallsubscribedbook.component';
+import { CancelsubscriptionComponent } from './cancelsubscription/cancelsubscription.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { ViewallsubscribedbookComponent } from './components/viewallsubscribedbo
         UpdatebookComponent,
         BlockorunblockComponent,
         BooksubscribeComponent,
-        ViewallsubscribedbookComponent
+        ViewallsubscribedbookComponent,
+        CancelsubscriptionComponent
   ],
   imports: [
     BrowserModule,

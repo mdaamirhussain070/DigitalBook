@@ -40,7 +40,7 @@ updateBook(){
   this.createBookReq.Publisher=this.Publisher.value;
   this.createBookReq.Code=this.Code.value;
   this.createBookReq.Status=this.Status.value;
-  this.createBookReq.Content=<any>this.Content.value;
+  this.createBookReq.BookContent=<any>this.Content.value;
   let bookId=this.BookId.value;
   this.updateBookService.updateBookServ(this.createBookReq,bookId).subscribe(respdata=>{
     console.log(respdata);

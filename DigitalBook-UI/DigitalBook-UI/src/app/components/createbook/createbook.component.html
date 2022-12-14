@@ -75,11 +75,11 @@
     </div>
     <div class="row" >
         <div class="col mb-3">
-            <label for="content" class="form-label">Content</label>
+            <label for="bookContent" class="form-label">Content</label>
         </div>
         <div class="col mb-3">
-            <textarea class="form-control" id="content" formControlName="content"></textarea>
-            <div class="form-text text-danger" *ngIf="Content.errors?.['required'] && (Content.touched || Content.dirty)">Book content is rquired</div>
+            <textarea class="form-control" id="bookContent" formControlName="bookContent"></textarea>
+            <div class="form-text text-danger" *ngIf="BookContent.errors?.['required'] && (BookContent.touched || BookContent.dirty)">Book content is rquired</div>
         </div>
         
     </div>
