@@ -11,19 +11,19 @@ public class BookRespPayload {
 	@Size(max = 150)
 	private String title;
 	
-//	@NotBlank
+	@NotBlank
 //	@UniqueElements
 //	@Size(min=4 ,max=7)
 	private int code;
 	
-//	@NotBlank
+	@NotBlank
 	private int authorId;
 	
 	@NotBlank
 	@Size(max = 100)
 	private String category;
 
-//	@NotBlank
+	@NotBlank
 //	@Size(max = 50)
 	private double price;
 	
