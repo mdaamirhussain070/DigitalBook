@@ -186,8 +186,11 @@ public class BookServiceImpl implements BookService {
 
 	@Override
 	public List<BookReaderContent> getReaderBook(long readerId) {
-		
+
+		log.info("Repository called");
 		List<BookReaderContent> books=viewRepository.findAllByReaderId(readerId);
+		log.info("repository execution ended");
+		System.out.println(books);
 		return books;
 	}
 

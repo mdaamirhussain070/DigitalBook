@@ -137,6 +137,7 @@ public class BookController {
 	@GetMapping("/readers/{readerId}/books")
 	public ResponseEntity<List<BookReaderContent>> getReaderBook(@PathVariable("readerId") long readerId){
 		
+		log.info("All Books by reader id started");
 		List<BookReaderContent> readerbook=bookService.getReaderBook(readerId);
 		
 		return new ResponseEntity<>(readerbook,HttpStatus.OK);

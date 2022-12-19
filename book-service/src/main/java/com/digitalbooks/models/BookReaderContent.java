@@ -9,7 +9,7 @@ import org.hibernate.annotations.Immutable;
 
 
 @Entity(name="subscribedbook")
-@Immutable
+
 public class BookReaderContent {
 
 	@Id
@@ -33,9 +33,7 @@ public class BookReaderContent {
 	private LocalDateTime dateOfSubscription;
 	
 
-	public BookReaderContent() {
-		super();
-	}
+	
 
 
 	public int getBookId() {
@@ -90,6 +88,61 @@ public class BookReaderContent {
 
 	public LocalDateTime getDateOfSubscription() {
 		return dateOfSubscription;
+	}
+
+
+	public void setBookId(int bookId) {
+		this.bookId = bookId;
+	}
+
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+
+	public void setBookcontent(String bookcontent) {
+		this.bookcontent = bookcontent;
+	}
+
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+
+	public void setAutherId(String autherId) {
+		this.autherId = autherId;
+	}
+
+
+	public void setPrice(String price) {
+		this.price = price;
+	}
+
+
+	public void setPublisher(String publisher) {
+		this.publisher = publisher;
+	}
+
+
+	public void setSubscriptionId(long subscriptionId) {
+		this.subscriptionId = subscriptionId;
+	}
+
+
+	public void setReaderId(long readerId) {
+		this.readerId = readerId;
+	}
+
+
+	public void setDateOfSubscription(LocalDateTime dateOfSubscription) {
+		this.dateOfSubscription = dateOfSubscription;
 	}
 	
 
